@@ -161,12 +161,4 @@ Author
 
 HTP
 
-Twitter/X:
-
-https://x.com/AloName15
-
-Donate (Buy me bún bò):
-
-https://buymeacoffee.com/chaoshtp
-
 Public domain. Use freely.
