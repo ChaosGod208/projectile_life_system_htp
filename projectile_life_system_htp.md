@@ -2,16 +2,14 @@ Projectile Life System (HTP)
 
 A micro-framework that fixes one of the biggest flaws in RPG/ARPG/MMO combat.
 
-
 ---
 
 Core Idea
 
-Every skill/projectile has its own HP (Life).
+Every skill/projectile has its own HP (Life).  
 It decays over distance, can be damaged, can clash with other skills, and can be drained.
 
-Biến projectile từ “object vô tri” → thành entity sống với tương tác thực chiến.
-
+This turns projectiles from “mindless objects” into living entities with real combat interactions.
 
 ---
 
@@ -19,141 +17,109 @@ Core Mechanics
 
 1. Skill HP (Life)
 
-Mỗi skill có một chỉ số:
+Each skill has a stat:
 
 SkillLife = BaseLife × (UserMagicPowerScaling)
 
-HP này đại diện cho độ bền năng lượng.
-
+This HP represents the skill’s energy durability.
 
 ---
 
 2. Distance Decay
 
-Skill mất dần HP khi bay xa:
+The skill gradually loses HP as it travels:
 
 HP_loss = Distance × DecayRate
 
-→ Skill yếu dần, không thể bay vô hạn.
-
+→ Skills weaken over range and cannot travel infinitely.
 
 ---
 
 3. Projectile Clash
 
-Khi 2 skill chạm nhau:
+When two skills collide:
 
-Skill A Life > Skill B Life → A xuyên qua (Life = LifeA – LifeB)
-
-Skill A Life < Skill B Life → A bị phá
-
-Life ngang nhau → cả hai nổ tại chỗ
-
-
+- Skill A Life > Skill B Life → A pierces through (remaining Life = LifeA – LifeB)  
+- Skill A Life < Skill B Life → A is destroyed  
+- Life equal → both explode on the spot
 
 ---
 
 4. Projectile Damage Taken
 
-Mọi nguồn damage có thể giảm Life của skill:
+Any damage source can reduce a skill’s Life:
 
-đạn
+- Bullets/projectiles  
+- Other spells  
+- Melee weapons hitting the skill  
+- Traps  
+- Auras  
+- Terrain effects
 
-spell khác
-
-vũ khí chém trúng skill
-
-trap
-
-aura
-
-terrain
-
-
-→ Combat có chiều sâu gấp nhiều lần.
-
+→ Combat gains many layers of depth.
 
 ---
 
 5. Skill Drain (Energy Leech)
 
-Skill của người chơi có thể hút Life từ skill đối thủ để:
+Certain player skills can leech Life from enemy skills to:
 
-tăng damage
-
-tăng thời gian tồn tại
-
-tăng kích thước
-
-đổi thuộc tính (nếu đủ Life)
-
-
+- Increase damage  
+- Extend duration  
+- Increase size  
+- Change properties (if enough Life is drained)
 
 ---
 
 6. Death Behavior
 
-Khi SkillLife = 0 → skill chết:
+When SkillLife reaches 0 → the skill “dies” and can:
 
-nổ
-
-tan
-
-phân rã thành energy
-
-tạo secondary effect (nếu design cho phép)
-
-
+- Explode  
+- Dissipate  
+- Break down into raw energy  
+- Trigger a secondary effect (if designed)
 
 ---
 
-Example
+Examples
 
 Fireball
 
-BaseLife: 100
+BaseLife: 100  
+DecayRate: 2 HP/m  
 
-DecayRate: 2 HP/m
+Travels 30m → loses 60 HP → arrives with 40 HP remaining.
 
-Travel: 30m
-→ mất 60 HP
-→ còn 40 HP khi đến mục tiêu
+If it collides with an Ice Lance (Life = 50):  
 
-
-Nếu nó gặp Ice Lance (Life = 50):
-
-Ice Lance (50) > Fireball (40) → Fireball bị phá, Ice Lance còn 10.
-
+Ice Lance (50) > Fireball (40) → Fireball is destroyed, Ice Lance continues with 10 Life left.
 
 ---
 
-Lightning Beam (drain)
+Lightning Beam (drain type)
 
-Beam hút 5 HP/s từ skill gần đó.
-Nếu beam chạm 3 projectile:
+The beam drains 5 HP/s from nearby enemy projectiles.  
+If it passes through 3 enemy projectiles:  
 
-3 × 5 = 15 HP/s
-Beam dày hơn, damage tăng.
-
-
+3 × 5 = 15 HP/s drained  
+→ Beam grows thicker and deals increased damage.
 
 ---
 
 Notes
 
-Micro-framework nhưng mở ra hệ combat hoàn toàn mới.
+A micro-framework that opens up an entirely new combat system.
 
-Phù hợp với RPG / ARPG / MMO / MOBA / Shooter fantasy.
+Perfect for RPG / ARPG / MMO / MOBA / fantasy shooters.
 
-Dễ code thử: chỉ cần thêm Life vào projectile class.
+Easy to prototype: just add a Life value to your projectile class.
 
-Tạo ra counterplay: “fight skill bằng skill”.
+Creates meaningful counterplay: “fight skill with skill”.
 
-Tương thích 100% với Relative Defense và Armor Layer của HTP.
+100% compatible with HTP’s Relative Defense and Armor Layer systems.
 
-Là bước đệm để làm “Spell Ecosystem” — nơi skill sống như sinh vật năng lượng.
-
-
+Serves as a foundation for a full “Spell Ecosystem” — where skills behave like living energy entities.
 
 ---
 
