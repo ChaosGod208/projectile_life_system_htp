@@ -93,8 +93,7 @@ This framework is designed for **RPGs, ARPGs, MMOs, MOBAs, and fantasy shooters*
 ---
 
 ## 🔗 Original Gist
-
-HTP Projectile Life System — [Gist Version](https://gist.github.com/ChaosGod208/015c1935bc223483897f93e3617e0b86)  
+  
 Full gist archive (100+ frameworks): [ChaosGod208 gist](https://gist.github.com/ChaosGod208)
 
 ---
